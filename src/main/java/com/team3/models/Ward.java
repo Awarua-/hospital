@@ -1,4 +1,4 @@
-package main.java.com.team3.models;
+package com.team3.models;
 
 /**
  * Created by Maxeonyx on 20/05/2016.

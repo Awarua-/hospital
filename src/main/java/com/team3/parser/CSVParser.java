@@ -1,9 +1,15 @@
-package main.java.com.team3.parser;
+package com.team3.parser;
 
-import main.java.com.team3.models.*;
+import com.team3.models.Gender;
+import com.team3.models.Movement;
+import com.team3.models.Patient;
+import com.team3.models.Ward;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -30,7 +36,7 @@ public class CSVParser {
 			//System.out.println(dt);
 			int id = Integer.parseInt(s[0]);
 			Gender g = Gender.fromInt(Integer.parseInt(s[3]));
-			Patient p = new Patient(id, s[1], dt.toLocalDate(), g);
+			Patient p = new Patient(id, s[1], dt, g);
 			patients.add(p);
 			line=br.readLine();
 		}
@@ -70,16 +76,16 @@ public class CSVParser {
 				to = Integer.parseInt(s[3]);
 			String[] d = s[4].split("-");
 			LocalDateTime dt = LocalDateTime.of(Integer.parseInt(d[0]), Integer.parseInt(d[1]), Integer.parseInt(d[2]), 0, 0);
-			moves.add(new Movement(id, patient_id, from, to, dt.toLocalDate()));
+			moves.add(new Movement(id, patient_id, from, to, dt));
 				
 		}
 	}
 	
 	public static void main(String[] args) {
 		CSVParser me=new CSVParser();
-		String patient_filename="/home/ke/hospital/Data/patients.csv";
-		String wards_filename = "/home/ke/hospital/Data/wards.csv";
-		String moves_filename = "/home/ke/hospital/Data/movements.csv";
+		String patient_filename="./Data/patients.csv";
+		String wards_filename = "./Data/wards.csv";
+		String moves_filename = "./Data/movements.csv";
 		try {
 			me.parsePatient(patient_filename);
 			me.parseWards(wards_filename);

@@ -1,22 +1,26 @@
-package main.java.com.team3.processor;
+package com.team3.processor;
 
-import main.java.com.team3.models.Movement;
+import com.team3.models.Movement;
+import com.team3.models.Patient;
+import com.team3.models.State;
+import com.team3.models.Ward;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Maxeonyx on 20/05/2016.
  */
 public class Processor {
 
-    private ArrayList<Patient> patients;
-    private ArrayList<Ward> wards;
-    private ArrayList<Movement> movements;
+    private List<Patient> patients;
+    private List<Ward> wards;
+    private List<Movement> movements;
     private State[][] states;
-    private ArrayList<Movement> [] movesByDay;
+    private List<Movement> [] movesByDay;
 
     public HashMap<LocalDate, HashMap<Long, ArrayList<Long>>> stateList;
 

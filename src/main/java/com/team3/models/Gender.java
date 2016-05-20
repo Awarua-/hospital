@@ -1,6 +1,4 @@
-package main.java.com.team3.models;
-
-import com.sun.prism.impl.BaseMesh;
+package com.team3.models;
 
 /**
  * Created by Maxeonyx on 20/05/2016.

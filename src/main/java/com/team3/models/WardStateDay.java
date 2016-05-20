@@ -1,4 +1,4 @@
-package main.java.com.team3.models;
+package com.team3.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
