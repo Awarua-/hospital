@@ -9,6 +9,18 @@ app.controller('HospitalController', ['$http', '$scope', function($http, $scope)
 
     //ui stuff
     hosp.range = false;
+    hosp.date1 = new Date(2020, 0, 1);
+    hosp.date2 = new Date(2020, 12, 31);
+
+    hosp.rangeChange = function(){
+        console.log(hosp.date1);
+        console.log(hosp.date2);
+        if (hosp.range){
+
+        } else {
+
+        }
+    };
 
 
     //data
