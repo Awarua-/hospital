@@ -49,6 +49,7 @@ public class Processor {
     public void shift(int day, int from, int to, int pid) {
         state[day][(int)from].numDischarges++;
         state[day][(int)to].numAdmissions++;
+        state[day][(int) to].patients.add((long )pid);
         patients.get(pid).curWard = to;
 
 
