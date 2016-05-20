@@ -9,15 +9,15 @@ public class Movement {
 
     private long id;
     private long patient;
+    private long fromWard;
     private long toWard;
-    private String name;
     private LocalDate date;
 
-    public Movement(long id, long patient, long toWard, String name, LocalDate date) {
+    public Movement(long id, long patient, long fromWard, long toWard, LocalDate date) {
         this.id = id;
         this.patient = patient;
         this.toWard = toWard;
-        this.name = name;
+        this.fromWard = fromWard;
         this.date = date;
     }
 
@@ -37,14 +37,6 @@ public class Movement {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public LocalDate getDate() {
         return date;
     }
@@ -59,5 +51,13 @@ public class Movement {
 
     public void setPatient(long patient) {
         this.patient = patient;
+    }
+
+    public long getFromWard() {
+        return fromWard;
+    }
+
+    public void setFromWard(long fromWard) {
+        this.fromWard = fromWard;
     }
 }

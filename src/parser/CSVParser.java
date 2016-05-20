@@ -27,7 +27,7 @@ public class CSVParser {
 			//System.out.println(dt);
 			int id = Integer.parseInt(s[0]);
 			Gender g = Gender.fromInt(Integer.parseInt(s[3]));
-			Patient p = new Patient(id, s[1], dt, g);
+			Patient p = new Patient(id, s[1], dt.toLocalDate(), g);
 			patients.add(p);
 			line=br.readLine();
 		}
@@ -67,7 +67,7 @@ public class CSVParser {
 				to = Integer.parseInt(s[3]);
 			String[] d = s[4].split("-");
 			LocalDateTime dt = LocalDateTime.of(Integer.parseInt(d[0]), Integer.parseInt(d[1]), Integer.parseInt(d[2]), 0, 0);
-			moves.add(new Movement(id, patient_id, from, to, dt));
+			moves.add(new Movement(id, patient_id, from, to, dt.toLocalDate()));
 				
 		}
 	}
