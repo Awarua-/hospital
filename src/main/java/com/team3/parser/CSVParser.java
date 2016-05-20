@@ -1,8 +1,11 @@
+package main.java.com.team3.parser;
+
+import main.java.com.team3.models.*;
+
 import java.io.*;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import models.*;
 
 public class CSVParser {
 	public ArrayList<Patient> patients;
