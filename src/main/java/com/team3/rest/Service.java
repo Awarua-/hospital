@@ -44,9 +44,7 @@ public class Service {
         int day2 = Integer.parseInt(date2);
         State[][] sendStates = new State[day2 - day1][8];
 
-        for (int i = 0; i < day2 - day1; i++) {
-            sendStates[i] = states[day1];
-        }
+        System.arraycopy(states, day1, sendStates, 0, day2 - day1);
         String json = gson.toJson(sendStates);
         return Response.status(200).header("Content-Type", "application/json").entity(json).build();
     }
