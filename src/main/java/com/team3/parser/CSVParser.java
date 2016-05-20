@@ -83,9 +83,10 @@ public class CSVParser {
 	
 	public static void main(String[] args) {
 		CSVParser me=new CSVParser();
-		String patient_filename="/home/ke/hospital/Data/patients.csv";
-		String wards_filename = "/home/ke/hospital/Data/wards.csv";
-		String moves_filename = "/home/ke/hospital/Data/movements.csv";
+
+		String patient_filename="./Data/patients.csv";
+		String wards_filename = "./Data/wards.csv";
+		String moves_filename = "./Data/movements.csv";
 		try {
 			me.parsePatient(patient_filename);
 			me.parseWards(wards_filename);

@@ -1,6 +1,6 @@
 package com.team3.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by Maxeonyx on 20/05/2016.
@@ -9,15 +9,15 @@ public class Movement {
 
     private long id;
     private long patient;
+    private long fromWard;
     private long toWard;
-    private String name;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public Movement(long id, long patient, long toWard, String name, LocalDate date) {
+    public Movement(long id, long patient, long fromWard, long toWard, LocalDateTime date) {
         this.id = id;
         this.patient = patient;
+        this.fromWard = fromWard;
         this.toWard = toWard;
-        this.name = name;
         this.date = date;
     }
 
@@ -28,6 +28,14 @@ public class Movement {
     public void setToWard(long toWard) {
         this.toWard = toWard;
     }
+ 
+    public long getFromWard() {
+        return fromWard;
+    }
+
+    public void setFromWard(long fromWard) {
+        this.fromWard = fromWard;
+    }
 
     public long getId() {
         return id;
@@ -37,19 +45,11 @@ public class Movement {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
