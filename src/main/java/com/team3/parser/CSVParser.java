@@ -82,10 +82,10 @@ public class CSVParser {
 			String[] s = line.split(",");
 			long id = Integer.parseInt(s[0]);
 			long patient_id = Integer.parseInt(s[1]);
-			long from = -1;
+			long from = 0;
 			if (s[2].contains("0123456789"))
 				from = Integer.parseInt(s[2]);
-			long to = -1;
+			long to = 0;
 			if (s[3].contains("0123456789"))
 				to = Integer.parseInt(s[3]);
 			String[] d = s[4].split("-");
