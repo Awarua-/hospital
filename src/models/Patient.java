@@ -1,6 +1,6 @@
 package models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by Maxeonyx on 20/05/2016.
@@ -9,11 +9,11 @@ public class Patient {
 
     public long id;
     public String name;
-    public LocalDate dob;
+    public LocalDateTime dob;
     public Gender gender;
 
 
-    public Patient(long id, String name, LocalDate dob, Gender gender) {
+    public Patient(long id, String name, LocalDateTime dob, Gender gender) {
         this.id = id;
         this.name = name;
         this.dob = dob;
@@ -36,11 +36,11 @@ public class Patient {
         this.name = name;
     }
 
-    public LocalDate getDob() {
+    public LocalDateTime getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(LocalDateTime dob) {
         this.dob = dob;
     }
 
