@@ -12,11 +12,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CSVParser {
-	public ArrayList<Patient> patients;
-	public ArrayList<Ward> wards;
-	public ArrayList<Movement> moves;
+	public List<Patient> patients;
+	public List<Ward> wards;
+	public List<Movement> moves;
 
 	public CSVParser(){
 		String patient_filename="./Data/patients.csv";

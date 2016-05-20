@@ -29,7 +29,7 @@ public class Processor {
 
     public HashMap<Long, ArrayList<Long>> currState;
 
-    public Processor(ArrayList<Patient> patients, ArrayList<Ward> wards, List<Movement> movements) {
+    public Processor(List<Patient> patients, List<Ward> wards, List<Movement> movements) {
         this.patients = patients;
         this.ward = wards;
         this.movements = movements;
@@ -37,6 +37,10 @@ public class Processor {
             waitList[i] = new ArrayList<Long>();
         rejections = 0;
         deaths = 0;
+    }
+
+    public State[][] getStates() {
+        return state;
     }
 
 
