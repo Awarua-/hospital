@@ -20,8 +20,8 @@ public class Processor {
     private List<Ward> ward;
     private List<Movement> movements;
     private State[][] state;
-    private List<Movement> [] movesByDay;
-    List<Long> waitList[];
+    private ArrayList<ArrayList<Movement>> movesByDay;
+    ArrayList<ArrayList<Long>> waitList;
     int rejections;
     int deaths;
 
@@ -33,9 +33,9 @@ public class Processor {
         this.patients = patients;
         this.ward = wards;
         this.movements = movements;
-        waitList = new ArrayList[8];
+        waitList = new ArrayList<>();
         for (int i = 0; i < 8; ++i)
-            waitList[i] = new ArrayList<Long>();
+            waitList.add(new ArrayList<Long>());
         rejections = 0;
         deaths = 0;
     }
@@ -60,10 +60,9 @@ public class Processor {
             //patients.get(pid).curWard = 0;
         }
 
-
-        if (waitList[(int)from].size() > 0) {
-            int pid2 = (int) (long) waitList[from].get(0);
-            waitList[from].remove(0);
+        if (waitList.get((int)from).size() > 0) {
+            int pid2 = (int) (long) waitList.get(from).get(0);
+            waitList.get(from).remove(0);
             state[day][patients.get(pid2).curWard].patients.remove(pid2);
             shift(day, patients.get(pid2).curWard, from, pid2);
         }
@@ -80,7 +79,7 @@ public class Processor {
             for (int i = 0; i < 8; ++i)
                 state[day][i] = state[day-1][i].clone2();
 
-            for (Movement m : movesByDay[day]) {
+            for (Movement m : movesByDay.get(day)) {
                 long from = m.getFromWard();
                 long to = m.getToWard();
                 Long pid = m.getPatient();
@@ -100,7 +99,7 @@ public class Processor {
                 }
                 else {
                     if (state[day][(int)to].patients.size() >= ward.get((int)to).getCapacity()) {
-                        waitList[(int)to].add(pid);
+                        waitList.get((int)to).add(pid);
                         continue;
                     }
                 }
@@ -115,14 +114,14 @@ public class Processor {
 
     private void makeDays() {
 
-        ArrayList<Movement>[] movesByDay = new ArrayList[366];
-        for (int i = 0; i < movesByDay.length; i++) {
-            movesByDay[i] = new ArrayList<Movement>();
+        movesByDay = new ArrayList<>();
+        for (int i = 0; i < movesByDay.size(); i++) {
+            movesByDay.add(new ArrayList<Movement>());
         }
 
         for (Movement move : movements) {
 
-            movesByDay[dateToInt(move.getDate())].add(move);
+            movesByDay.get(dateToInt(move.getDate())).add(move);
 
         }
 
