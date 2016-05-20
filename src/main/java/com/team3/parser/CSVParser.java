@@ -18,14 +18,27 @@ public class CSVParser {
 	public ArrayList<Ward> wards;
 	public ArrayList<Movement> moves;
 
+	public CSVParser(){
+		String patient_filename="./Data/patients.csv";
+		String wards_filename = "./Data/wards.csv";
+		String moves_filename = "./Data/movements.csv";
+		try {
+			this.parsePatient(patient_filename);
+			this.parseWards(wards_filename);
+			this.parseMovements(moves_filename);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void parsePatient(String filename) throws IOException {
 		patients = new ArrayList<Patient>();
 		Path path = Paths.get(filename);
-
 		BufferedReader br = Files.newBufferedReader(path);
 		String line=br.readLine();
 		line=br.readLine();
 		while (line != null) {
+
 			//System.out.println(line);
 			String[] s = line.split(",");
 			//for (String t : s)
@@ -65,6 +78,7 @@ public class CSVParser {
 		String line = br.readLine();
 		line = br.readLine();
 		while (line != null) {
+//			System.out.println(line);
 			String[] s = line.split(",");
 			long id = Integer.parseInt(s[0]);
 			long patient_id = Integer.parseInt(s[1]);
@@ -77,23 +91,12 @@ public class CSVParser {
 			String[] d = s[4].split("-");
 			LocalDateTime dt = LocalDateTime.of(Integer.parseInt(d[0]), Integer.parseInt(d[1]), Integer.parseInt(d[2]), 0, 0);
 			moves.add(new Movement(id, patient_id, from, to, dt));
-				
+			line=br.readLine();
 		}
 	}
 	
 	public static void main(String[] args) {
 		CSVParser me=new CSVParser();
-		String patient_filename="./Data/patients.csv";
-		String wards_filename = "./Data/wards.csv";
-		String moves_filename = "./Data/movements.csv";
-		try {
-			me.parsePatient(patient_filename);
-			me.parseWards(wards_filename);
-			me.parseMovements(moves_filename);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	}
 }

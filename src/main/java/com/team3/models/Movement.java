@@ -1,5 +1,4 @@
 package com.team3.models;
-
 import java.time.LocalDateTime;
 
 /**
@@ -28,7 +27,7 @@ public class Movement {
     public void setToWard(long toWard) {
         this.toWard = toWard;
     }
- 
+
     public long getFromWard() {
         return fromWard;
     }
