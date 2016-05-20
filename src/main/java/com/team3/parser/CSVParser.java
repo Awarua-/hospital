@@ -1,5 +1,10 @@
 package com.team3.parser;
 
+import com.team3.models.Gender;
+import com.team3.models.Movement;
+import com.team3.models.Patient;
+import com.team3.models.Ward;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,10 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import com.team3.models.Patient;
-import com.team3.models.Ward;
-import com.team3.models.Movement;
 
 public class CSVParser {
 	public ArrayList<Patient> patients;
@@ -82,6 +83,7 @@ public class CSVParser {
 	
 	public static void main(String[] args) {
 		CSVParser me=new CSVParser();
+
 		String patient_filename="./Data/patients.csv";
 		String wards_filename = "./Data/wards.csv";
 		String moves_filename = "./Data/movements.csv";
