@@ -1,4 +1,5 @@
 package com.team3.models;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -44,8 +45,8 @@ public class Movement {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDate getDate() {
+        return date.toLocalDate();
     }
 
     public void setDate(LocalDateTime date) {

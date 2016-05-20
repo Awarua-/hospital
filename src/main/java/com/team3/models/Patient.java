@@ -10,6 +10,7 @@ public class Patient {
     public String name;
     public LocalDateTime dob;
     public Gender gender;
+    public int curWard;
 
 
     public Patient(long id, String name, LocalDateTime dob, Gender gender) {
@@ -17,6 +18,7 @@ public class Patient {
         this.name = name;
         this.dob = dob;
         this.gender = gender;
+        this.curWard = 0;
     }
 
     public long getId() {

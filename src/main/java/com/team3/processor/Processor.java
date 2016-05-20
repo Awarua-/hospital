@@ -21,7 +21,7 @@ public class Processor {
     private List<Movement> movements;
     private State[][] state;
     private List<Movement> [] movesByDay;
-    List<Long> waitingList[];
+    List<Long> waitList[];
     int rejections;
     int deaths;
 
@@ -34,7 +34,7 @@ public class Processor {
         this.ward = wards;
         this.movements = movements;
         for (int i = 0; i < 8; ++i)
-            waitingList[i] = new ArrayList<Long>();
+            waitList[i] = new ArrayList<Long>();
         rejections = 0;
         deaths = 0;
     }
@@ -46,6 +46,20 @@ public class Processor {
         return d.getDayOfYear();
     }
 
+    public void shift(int day, int from, int to, int pid) {
+        state[day][(int)from].numDischarges++;
+        state[day][(int)to].numAdmissions++;
+        patients.get(pid).curWard = to;
+
+
+
+        if (waitList[(int)from].size() > 0) {
+            int pid2 = (int) (long) waitList[from].get(0);
+            waitList[from].remove(0);
+            shift(day, patients.get(pid2).curWard, from, pid2);
+        }
+    }
+
     public void process() throws FileNotFoundException {
         state = new State[367][8];
         for (int i = 0; i < 8; ++i) {
@@ -55,7 +69,7 @@ public class Processor {
         for (int day = 1; day <= 366; day++) {
             // Initialize next day as initially equivalent
             for (int i = 0; i < 8; ++i)
-                state[day][i] = state[day-1][i].clone();
+                state[day][i] = state[day-1][i].clone2();
 
             for (Movement m : movesByDay[day]) {
                 long from = m.getFromWard();
@@ -63,27 +77,27 @@ public class Processor {
                 Long pid = m.getPatient();
                 if (from == 0) {
                     if (to == 2) {
-                        if (state[day][2].patients >= ward.get(2).getCapacity()) {
+                        if (state[day][2].patients.size() >= ward.get(2).getCapacity()) {
                             deaths++;
                             continue;
                         }
                     }
                     else {
-                        if (state[day][1].patients >= ward.get(1).getCapacity()) {
+                        if (state[day][1].patients.size() >= ward.get(1).getCapacity()) {
                             rejections++;
                             continue;
                         }
                     }
                 }
                 else {
-                    if (state[day][(int)to].patients >= ward.get((int)to).getCapacity()) {
-                        waitingList[(int)to].add(pid);
+                    if (state[day][(int)to].patients.size() >= ward.get((int)to).getCapacity()) {
+                        waitList[(int)to].add(pid);
                         continue;
                     }
                 }
 
                 // Shift
-                //state[day][int(to)]
+
 
             }
         }
@@ -104,7 +118,7 @@ public class Processor {
         }
 
     }
-
+/*
     private HashMap<Long, ArrayList<Long>> copyWardStates(HashMap<Long, ArrayList<Long>> states) {
 
         HashMap<Long, ArrayList<Long>> newStates = new HashMap<>();
@@ -115,7 +129,7 @@ public class Processor {
 
         }
 
-    }
+    }*/
 
 
 
