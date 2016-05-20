@@ -33,6 +33,7 @@ public class Processor {
         this.patients = patients;
         this.ward = wards;
         this.movements = movements;
+        waitList = new ArrayList[8];
         for (int i = 0; i < 8; ++i)
             waitList[i] = new ArrayList<Long>();
         rejections = 0;
@@ -55,12 +56,15 @@ public class Processor {
         state[day][(int)to].numAdmissions++;
         state[day][(int) to].patients.add((long )pid);
         patients.get(pid).curWard = to;
-
+        if (to == 0) {
+            //patients.get(pid).curWard = 0;
+        }
 
 
         if (waitList[(int)from].size() > 0) {
             int pid2 = (int) (long) waitList[from].get(0);
             waitList[from].remove(0);
+            state[day][patients.get(pid2).curWard].patients.remove(pid2);
             shift(day, patients.get(pid2).curWard, from, pid2);
         }
     }
