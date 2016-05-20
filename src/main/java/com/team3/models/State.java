@@ -15,7 +15,7 @@ public class State {
     int numUniquePatients;
     int numDischarged;
 
-    State() {
+    public State() {
         firstDeath = -1;
         numDeaths = numEntries = numUniquePatients = numDischarged = 0;
     }

@@ -16,7 +16,7 @@ public class Service {
 
         return Response.status(200).entity(output).build();
     }
-
+/*
     @GET
     @Path("/date/{date}")
     public Response getDate(@PathParam("date") String date){
@@ -28,5 +28,5 @@ public class Service {
     public Response getRange(@PathParam("date1") String date1, @PathParam("date2") String date2){
 
     }
-
+*/
 }

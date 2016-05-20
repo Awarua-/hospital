@@ -17,10 +17,13 @@ import java.util.List;
 public class Processor {
 
     private List<Patient> patients;
-    private List<Ward> wards;
+    private List<Ward> ward;
     private List<Movement> movements;
-    private State[][] states;
+    private State[][] state;
     private List<Movement> [] movesByDay;
+    List<Long> waitingList[];
+    int rejections;
+    int deaths;
 
     public HashMap<LocalDate, HashMap<Long, ArrayList<Long>>> stateList;
 
@@ -28,8 +31,12 @@ public class Processor {
 
     public Processor(ArrayList<Patient> patients, ArrayList<Ward> wards, List<Movement> movements) {
         this.patients = patients;
-        this.wards = wards;
+        this.ward = wards;
         this.movements = movements;
+        for (int i = 0; i < 8; ++i)
+            waitingList[i] = new ArrayList<Long>();
+        rejections = 0;
+        deaths = 0;
     }
 
 
@@ -41,46 +48,51 @@ public class Processor {
 
     public void process() throws FileNotFoundException {
         state = new State[367][8];
-        for (int j = 0; j < )
         for (int i = 0; i < 8; ++i) {
             state[0][i] = new State();
         }
-
-        for ()
-
-        int day = 1;
-        for (Movement m : move) {
-
-        }
-
 
         for (int day = 1; day <= 366; day++) {
             // Initialize next day as initially equivalent
             for (int i = 0; i < 8; ++i)
                 state[day][i] = state[day-1][i].clone();
 
-            while (dateToInt(move[mi].getDate()) < day) {
+            for (Movement m : movesByDay[day]) {
+                long from = m.getFromWard();
+                long to = m.getToWard();
+                Long pid = m.getPatient();
+                if (from == 0) {
+                    if (to == 2) {
+                        if (state[day][2].patients >= ward.get(2).getCapacity()) {
+                            deaths++;
+                            continue;
+                        }
+                    }
+                    else {
+                        if (state[day][1].patients >= ward.get(1).getCapacity()) {
+                            rejections++;
+                            continue;
+                        }
+                    }
+                }
+                else {
+                    if (state[day][(int)to].patients >= ward.get((int)to).getCapacity()) {
+                        waitingList[(int)to].add(pid);
+                        continue;
+                    }
+                }
+
+                // Shift
+                //state[day][int(to)]
 
             }
-
-            if (dateToInt(move[i].getDate()) == day) {
-
-            }
-        }
-
-        LocalDate currDate = LocalDate.MIN;
-
-        for (Movement move : movements) {
-
-
-
         }
 
     }
 
     private void makeDays() {
 
-        ArrayList<Movement>[366] movesByDay = new ArrayList<Movement>[366];
+        ArrayList<Movement>[] movesByDay = new ArrayList[366];
         for (int i = 0; i < movesByDay.length; i++) {
             movesByDay[i] = new ArrayList<Movement>();
         }
