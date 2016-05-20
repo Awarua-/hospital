@@ -38,6 +38,8 @@ public class Processor {
             waitList.add(new ArrayList<Long>());
         rejections = 0;
         deaths = 0;
+        rejections = 0;
+        makeDays();
     }
 
     public State[][] getStates() {
@@ -74,7 +76,7 @@ public class Processor {
             state[0][i] = new State();
         }
 
-        for (int day = 1; day <= 366; day++) {
+        for (int day = 1; day <= 365; day++) {
             // Initialize next day as initially equivalent
             for (int i = 0; i < 8; ++i)
                 state[day][i] = state[day-1][i].clone2();
@@ -82,7 +84,13 @@ public class Processor {
             for (Movement m : movesByDay.get(day)) {
                 long from = m.getFromWard();
                 long to = m.getToWard();
+
+
                 Long pid = m.getPatient();
+
+                if (from == 0) {
+                    state[day][0].patients.add(pid);
+                }
                 if (from == 0) {
                     if (to == 2) {
                         if (state[day][2].patients.size() >= ward.get(2).getCapacity()) {
@@ -104,7 +112,7 @@ public class Processor {
                     }
                 }
 
-                // Shift
+                shift(day, (int) from, (int) to, (int)  (long)pid);
 
 
             }
@@ -115,12 +123,11 @@ public class Processor {
     private void makeDays() {
 
         movesByDay = new ArrayList<>();
-        for (int i = 0; i < movesByDay.size(); i++) {
+        for (int i = 0; i < 367; i++) {
             movesByDay.add(new ArrayList<Movement>());
         }
 
         for (Movement move : movements) {
-
             movesByDay.get(dateToInt(move.getDate())).add(move);
 
         }

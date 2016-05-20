@@ -11,7 +11,7 @@ import java.net.URI;
 
 public class Main {
 
-    private static final String BASE_URI = "http://172.19.0.232:8080/";
+    private static final String BASE_URI = "http://172.20.10.2:8080/";
     public static Processor processor;
 
     private static HttpServer startServer() {
