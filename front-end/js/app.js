@@ -29,43 +29,43 @@ app.controller('HospitalController', ['$http', '$scope', function($http, $scope)
             id: 1,
             name: 'Waiting Room',
             capacity: 70,
-            bounds: [[185, 127], [309, 362]]
+            bounds: [[368, 126], [503, 359]]
         },
         {
             id: 2,
             name: 'Emergency Department',
             capacity: 30,
-            bounds: [[15, 112], [184, 360]]
+            bounds: [[200, 111], [367, 361]]
         },
         {
             id: 3,
             name: 'General',
             capacity: 100,
-            bounds: [[157, 652], [409, 1034]]
+            bounds: [[343, 650], [597, 1037]]
         },
         {
             id: 4,
             name: 'Ward 1',
             capacity: 40,
-            bounds: [[114, 362], [221, 460]]
+            bounds: [[303, 361], [409, 460]]
         },
         {
             id: 5,
             name: 'Ward 2',
             capacity: 30,
-            bounds: [[18, 483], [139, 616]]
+            bounds: [[200, 483], [328, 616]]
         },
         {
             id: 6,
             name: 'Ward 3',
             capacity: 40,
-            bounds: [[17, 652], [135, 865]]
+            bounds: [[202, 652], [317, 865]]
         },
         {
             id: 7,
             name: 'Ward 4',
             capacity: 10,
-            bounds: [[160, 483], [255, 616]]
+            bounds: [[347, 483], [441, 616]]
         }
     ];
 
@@ -86,7 +86,9 @@ app.controller('HospitalController', ['$http', '$scope', function($http, $scope)
 
     hosp.map.on({
         click: function(e){
-            var point = e.containerPoint;
+            var point = e.layerPoint;
+            console.log(e);
+            console.log(point.y + " " + point.x);
             for (var i = 0; i < hosp.wards.length; i++){
                 var bounds = hosp.wards[i].bounds;
                 if (point.y >= bounds[0][0] && point.y <= bounds[1][0]){
