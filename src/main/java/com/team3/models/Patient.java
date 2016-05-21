@@ -1,55 +1,39 @@
 package com.team3.models;
-import java.time.LocalDateTime;
 
-/**
- * Created by Maxeonyx on 20/05/2016.
- */
+import java.time.LocalDate;
+
 public class Patient {
 
-    public long id;
-    public String name;
-    public LocalDateTime dob;
-    public Gender gender;
-    public int curWard;
+    private int id;
+    private String name;
+    private LocalDate dob;
+    private Gender gender;
 
-
-    public Patient(long id, String name, LocalDateTime dob, Gender gender) {
+    public Patient(int id, String name, LocalDate dob, Gender gender) {
         this.id = id;
         this.name = name;
         this.dob = dob;
         this.gender = gender;
-        this.curWard = 0;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDateTime getDob() {
+    public LocalDate getDob() {
         return dob;
-    }
-
-    public void setDob(LocalDateTime dob) {
-        this.dob = dob;
     }
 
     public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    @Override
+    public String toString() {
+        return String.valueOf(id);
     }
 }

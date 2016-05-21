@@ -1,9 +1,5 @@
 package com.team3.models;
 
-
-/**
- * Created by Maxeonyx on 20/05/2016.
- */
 public enum Gender {
     Male, Female, Other;
 
@@ -17,6 +13,10 @@ public enum Gender {
             case 2:
                 return Other;
         }
+    }
+
+    public static Gender fromString(String gender) {
+        return fromInt(Integer.parseInt(gender));
     }
 }
 

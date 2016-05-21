@@ -1,40 +1,80 @@
 package com.team3.models;
-/**
- * Created by Maxeonyx on 20/05/2016.
- */
+
+import com.team3.Hospital;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public class Ward {
 
-    public long id;
-    public String name;
-    public int capacity;
+    private int id;
+    private String name;
+    private int capacity;
+    private Set<Patient> patients;
+    private Set<Patient> waitingList;
+    private Hospital observer;
 
-    public Ward(long id, String name, int capacity) {
+    public Ward(int id, String name, int capacity) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
+        patients = new HashSet<>();
+        waitingList = new HashSet<>();
     }
 
-    public long getId() {
+    public void attachObserver(Hospital observer) {
+        this.observer = observer;
+    }
+
+    public int getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public Set<Patient> getPatients() {
+        return patients;
+    }
+
+    public void update() {
+
+    }
+
+    public boolean removePatient(Patient patient) {
+        boolean removed = patients.remove(patient);
+        if (removed) {
+            observer.notifyObservers(id);
+        }
+        return removed;
+    }
+
+    public boolean addPatient(Patient patient) {
+        if (patients.size() < capacity) {
+            return patients.add(patient);
+        }
+        return false;
+    }
+
+    public boolean isAtCapacity() {
+        return patients.size() >= capacity;
+    }
+
+    public boolean removePatientFromWaitingList(Patient patient) {
+        return waitingList.remove(patient);
+    }
+
+    public boolean addPatientToWaitingList(Patient patient) {
+        return waitingList.add(patient);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
     }
 }

@@ -1,63 +1,44 @@
 package com.team3.models;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-/**
- * Created by Maxeonyx on 20/05/2016.
- */
 public class Movement {
 
-    private long id;
-    private long patient;
-    private long fromWard;
-    private long toWard;
-    private LocalDateTime date;
+    private int id;
+    private int patientId;
+    private int fromWard;
+    private int toWard;
+    private LocalDate date;
 
-    public Movement(long id, long patient, long fromWard, long toWard, LocalDateTime date) {
+    public Movement(int id, int patientId, int fromWard, int toWard, LocalDate date) {
         this.id = id;
-        this.patient = patient;
+        this.patientId = patientId;
         this.fromWard = fromWard;
         this.toWard = toWard;
         this.date = date;
     }
 
-    public long getToWard() {
+    public int getToWard() {
         return toWard;
     }
 
-    public void setToWard(long toWard) {
-        this.toWard = toWard;
-    }
-
-    public long getFromWard() {
+    public int getFromWard() {
         return fromWard;
     }
 
-    public void setFromWard(long fromWard) {
-        this.fromWard = fromWard;
-    }
-
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public LocalDate getDate() {
-        return date.toLocalDate();
+        return date;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public long getPatient() {
-        return patient;
-    }
-
-    public void setPatient(long patient) {
-        this.patient = patient;
+    @Override
+    public String toString() {
+        return String.valueOf(id);
     }
 }
